@@ -1,0 +1,26 @@
+{
+    "name": "zacksleo/wordwrap",
+    "description": "wordwrap for chinese: 中英混排字符串均等分割",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zacksleo",
+            "email": "zacksleo@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "zacksleo\\wordwrap\\": "src/"
+        }
+    },
+    "require-dev": {
+        "ricoa/copywriting-correct": "^0.1",
+        "phpunit/phpunit": "^4.8"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "zacksleo\\wordwrap\tests\\": "tests"
+        }
+    }
+}
