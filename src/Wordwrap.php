@@ -11,19 +11,15 @@ class Wordwrap
         foreach ($matches[0] as $match) {
             $words[$match[1]] = $match[0];
         }
-        var_dump($words);
         $chars = preg_split('//u', $str, -1, PREG_SPLIT_NO_EMPTY);
         $res = array();
         $len = 0;
         $line = '';
         $index = 0;
         $j = 0;
-        foreach ($chars as $i => $char) {
-            if ($len >= $width * 2) {
-                $res[] = $line;
-                $line = '';
-                $len = 0;
-            }
+
+        for ($i = 0; $i < count($chars); $i++) {
+            $char = $chars[$i];
             //英文单词
             if (mb_strwidth($char) == 1) {
                 if (in_array($index, array_keys($words))) {
@@ -37,6 +33,10 @@ class Wordwrap
                         $line .= $word;
                         $len += mb_strwidth($word);
                         $index += strlen($word);
+                        $i = $i + mb_strwidth($word)-1;
+                        if ($i >= count($chars)) {
+                            $res[] = $line;
+                        }
                         continue;
                     }
                 } else {
@@ -45,8 +45,16 @@ class Wordwrap
             } else {
                 $len += 2;
             }
-            $index += strlen($char);
-            $line .= $char;
+           $line .= $char;
+           $index += strlen($char);
+            if ($len >= $width * 2) {
+                $res[] = $line;
+                $line = '';
+                $len = 0;
+            }
+        }
+        if(!empty($line)){
+            $res[] = $line;
         }
         return $res;
     }
