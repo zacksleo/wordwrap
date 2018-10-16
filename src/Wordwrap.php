@@ -33,7 +33,7 @@ class Wordwrap
                         $line .= $word;
                         $len += mb_strwidth($word);
                         $index += strlen($word);
-                        $i = $i + mb_strwidth($word)-1;
+                        $i = $i + mb_strwidth($word) - 1;
                         if ($i >= count($chars)) {
                             $res[] = $line;
                         }
@@ -45,15 +45,15 @@ class Wordwrap
             } else {
                 $len += 2;
             }
-           $line .= $char;
-           $index += strlen($char);
+            $line .= $char;
+            $index += strlen($char);
             if ($len >= $width * 2) {
                 $res[] = $line;
                 $line = '';
                 $len = 0;
             }
         }
-        if(!empty($line)){
+        if (!empty($line)) {
             $res[] = $line;
         }
         return $res;
